@@ -1,9 +1,14 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
+import NavBar from './component/NavBar'
+import Footer from './component/Footer'
 
 function ClientLayout() {
   return (
     <div>
-      <h1>cleint page </h1>
+      <NavBar />
+      <Outlet />
+      <Footer />
     </div>
   )
 }

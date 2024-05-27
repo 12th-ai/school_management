@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@mixin flexibox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+.main{
+border: 2px solid red;
+height: 100vh;
+width: 100vw;
+@include flexibox;
+
+
+.left-side{
+    border: 2px solid green;
+    width: 20%;
+    height: 100%;
+    position: sticky;
+    top: 0;
+}
+}
+.main-app{
+    border: 2px solid goldenrod;
+    width:80%;
+    height: 100%;
+
+    .header{
+        border: 2px solid blue;
+        padding: 15px;
+        position: sticky;
+        top: 0;
+    }
+    
+}

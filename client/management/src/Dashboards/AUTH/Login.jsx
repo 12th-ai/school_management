@@ -4,27 +4,38 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../Style/style.css'
+import axios from 'axios';
 
-const Register = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+const Login = () => {
+  
 
-  const handleImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setSelectedImage(e.target.result);
-      };
-      reader.readAsDataURL(event.target.files[0]);
+
+  const [values, setvalues] = useState({
+ 
+    username: '',
+
+    password: ''
+   
+  });
+
+  // const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3000/api/auth/login',values);
+      // setMessage(response.data.message);
+      console.log('Login successful:');
+    } catch (error) {
+      // setMessage(error.response.data.message);
+      console.error('Loginfdf failed:');
     }
   };
 
-  const handleClick = () => {
-    document.getElementById('imageInput').click();
-  };
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
    
         <div className='logo'>
         <img src={require('/Volumes/coding 1/backend/school_management/client/management/src/Dashboards/assets/D47pITKNRqPRaDQajUaj0Wg0Go2X+T9Wnsb06M2kwQAAAABJRU5ErkJggg==.png')} alt="" />
@@ -34,13 +45,13 @@ const Register = () => {
         <div className="inputs">
 
         <label htmlFor="">username</label> <br />
-        <input type="text" name="username" id="" placeholder='please enter your user name' /><br />
+        <input type="text" name="username" id="" placeholder='please enter your user name' onChange={e=>setvalues({...values,username:e.target.value})}  /><br />
 
         <label htmlFor="">password </label> <br />
-        <input type="text" name="email" id="" placeholder='please enter your password'  /><br />
+        <input type="text" name="password" id="" placeholder='please enter your password'  onChange={e=>setvalues({...values,password:e.target.value})} /><br />
        
       
-        <button>sign me in </button>
+        <button type='submit'>sign me in </button>
         <p>don't have an account <Link to='/authentication/register'>sign up</Link></p>
         </div>
 
@@ -50,5 +61,5 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
 

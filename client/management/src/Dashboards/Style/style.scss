@@ -133,12 +133,18 @@ form{
 
 
     .inputs{
+        input[type = file]{
+            display: none;
+          }
         .cookie{
             display: flex;
             .input{
                 padding: 0;
                 width: 20px;
             }
+            input[type = file]{
+                display: none;
+              }
         }
      
         margin-top:15px;
@@ -161,6 +167,18 @@ label{
     font-size: 13px;
     font-weight: 500;
     text-transform: capitalize;
+    &.first-prev{
+        svg{
+          opacity: 1;
+          pointer-events: all;
+          display: flex;
+        }
+        img{
+          opacity: 0 !important;
+          pointer-events: none !important;
+          display: none;
+        }
+      }
 }
 button{
     background-color: #6a73fa;
@@ -211,5 +229,8 @@ p{
   .course-links.visible,
   .staff-links.visible {
     max-height: 200px; /* Adjust based on your content */
+  }
+  input[type = file]{
+    display: none;
   }
   

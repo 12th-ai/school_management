@@ -16,17 +16,24 @@ const CreateAcount = async (req, res, next) => {
 };
 
 
+
 const login = async (req, res, next) => {
-    const { username, password } = req.body;
-  
-    try {
-      const token = await authservices.login(username, password);
-      res.cookie('token', token, { httpOnly: true });
-      res.json({ message: 'Login successful' });
-    } catch (error) {
-      res.status(401).json({ message: error.message });
-    }
-  };
+  const { username, password } = req.body;
+
+  try {
+    const token = await authservices.login(username, password);
+    res.cookie('token', token, { httpOnly: true });
+    res.json({ message: 'Login successful' });
+  } catch (error) {
+    res.status(401).json({ message: error.message });
+  }
+};
+
+
+
+
+
+
 
 module.exports = {
     CreateAcount,

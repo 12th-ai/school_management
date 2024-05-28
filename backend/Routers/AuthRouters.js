@@ -22,9 +22,9 @@ const storage = multer.diskStorage({
 
 
 const authControllers = require('../controllers/AuthController');
-router.post('api/auth/', authControllers.login);
 
 
 router.post('/api/auth/', upload.single("image"),authControllers.CreateAcount);
+router.post('/api/auth/login/', authControllers.login);
 
 module.exports = router;

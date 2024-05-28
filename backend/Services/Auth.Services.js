@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const cors = require('cors');
 
+
+
 const createUser = async (req) => {
     // Extract password and user data from request body
     const { password, username, email } = req.body;
@@ -37,26 +39,34 @@ const createUser = async (req) => {
 
 
 
-const generateToken = (user) => {
-  return jwt.sign({ id: user.user_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-};
+
+
 
 const login = async (username, password) => {
-  const [rows] = await db.query('SELECT * FROM users WHERE user_name = ?', [username]);
-  const user = rows[0];
-  
-  if (!user) {
-    throw new Error('Invalid username ');
+  const [users] = await db.query('SELECT * FROM users WHERE user_name = ?', [username]);
+
+  if (users.length === 0) {
+    throw new Error('User not found');
   }
 
-  const validPassword = await bcrypt.compare(password, user.password);
-  if (!validPassword) {
+  const user = users[0];
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) {
     throw new Error('Invalid password');
   }
 
-  const token = generateToken(user);
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
   return token;
 };
+
+module.exports = {
+  login,
+};
+
+
+
 
 
 

@@ -9,7 +9,7 @@ const CreateAcount = async (req, res, next) => {
         if (error.message === 'User already exists') {
             return res.status(409).json({ message: error.message }); // 409 Conflict
         }
-
+            
         next(error); // Pass the error to the error handling middleware
         console.log(error);
     }

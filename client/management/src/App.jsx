@@ -25,6 +25,8 @@ import Viewstudent from './Dashboards/componet/student/viewstudent';
 import Login from './Dashboards/AUTH/Login';
 import Register from './Dashboards/AUTH/Register';
 
+
+
 const router = createBrowserRouter([
   {
     path: '/*',
@@ -81,6 +83,7 @@ const router = createBrowserRouter([
     ],
    
   },
+
 ]);
 
 
